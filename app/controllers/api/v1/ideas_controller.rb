@@ -21,7 +21,6 @@ class Api::V1::IdeasController < ApplicationController
     end
   end
 
-  # PATCH/PUT /ideas/1
   def update
     if @idea.update(idea_params)
       render json: @idea
@@ -30,7 +29,6 @@ class Api::V1::IdeasController < ApplicationController
     end
   end
 
-  # DELETE /ideas/1
   def destroy
     @idea.destroy
   end
