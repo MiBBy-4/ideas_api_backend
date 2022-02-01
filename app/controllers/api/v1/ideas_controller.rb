@@ -1,19 +1,16 @@
 class Api::V1::IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :update, :destroy]
 
-  # GET /ideas
   def index
     @ideas = Idea.all
 
     render json: @ideas
   end
 
-  # GET /ideas/1
   def show
     render json: @idea
   end
 
-  # POST /ideas
   def create
     @idea = Idea.new(idea_params)
 
@@ -39,12 +36,10 @@ class Api::V1::IdeasController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_idea
       @idea = Idea.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def idea_params
       params.fetch(:idea, {})
     end
