@@ -15,7 +15,7 @@ class Api::V1::IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
 
     if @idea.save
-      render json: @idea, status: :created, location: @idea
+      render json: @idea, status: :created, location: api_v1_ideas_path(@idea) 
     else
       render json: @idea.errors, status: :unprocessable_entity
     end
@@ -39,6 +39,6 @@ class Api::V1::IdeasController < ApplicationController
     end
 
     def idea_params
-      params.fetch(:idea, {})
+      params.require(:idea).permit(:name, :description, :problem, :sphere, :investor_requirements, :geo_focus)
     end
 end
