@@ -34,6 +34,7 @@ class Api::V1::IdeasController < ApplicationController
   end
 
   private
+  
     def set_idea
       @idea = Idea.find(params[:id])
     end
