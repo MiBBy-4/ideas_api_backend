@@ -1,6 +1,8 @@
-class Businessmans::RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
+
   private 
+  
   def respond_with(resource, _opts = {})
     register_success && return if resource.persisted?
 
@@ -10,7 +12,7 @@ class Businessmans::RegistrationsController < Devise::RegistrationsController
   def register_success
     render json: {
       message: 'Signed up sucessfully',
-      user: current_businessman
+      user: current_user
     }, status: :ok
   end
 

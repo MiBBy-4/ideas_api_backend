@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :businessmen,
+  devise_for :users,
   controllers: {
-    sessions: 'businessmans/sessions',
-    registrations: 'businessmans/registrations'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
   get '/member=data', to: 'members#show'
   namespace :api do
