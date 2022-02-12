@@ -1,7 +1,7 @@
 module CurrentCustomerConcern
   extend ActiveSupport::Concern
 
-  include do
+  included do
     before_action :set_current_customer
   end
 

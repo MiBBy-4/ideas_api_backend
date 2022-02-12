@@ -1,6 +1,7 @@
 class Users::SessionsController < ApplicationController
-  respond_to :json
   include CurrentCustomerConcern
+  respond_to :json
+
 
   def create
     customer = Customer.find_by(email: params['customer']['email']).try(:authenticate, params['customer']['password'])
