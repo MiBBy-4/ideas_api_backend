@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users,
-  controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
-  get '/member-data', to: 'members#show'
+  namespace :users do
+    resources :sessions, only: [:create]
+    resources :registrations, only: [:create]
+    delete :logout, to: 'sessions#logout'
+    get :logged_in, to: 'session#logged_in'
+  end
+
   namespace :api do
     namespace :v1 do
       resources :ideas

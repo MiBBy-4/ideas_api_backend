@@ -1,30 +1,40 @@
-class Users::SessionsController < Devise::SessionsController
+class Users::SessionsController < ApplicationController
   respond_to :json
+  include CurrentCustomerConcern
 
-  private
-  
-  def respond_with(_resource, _opts = {})
-    render json: {
-      message: 'You are logged in.',
-      user: current_user
-    }, status: :ok
+  def create
+    customer = Customer.find_by(email: params['customer']['email']).try(:authenticate, params['customer']['password'])
+
+    if customer
+      session[:customer_id] = customer.id
+      render json: {
+        status: :created,
+        logged_in: true,
+        customer: customer
+      }
+    else
+      render json: { status: 401 }
+    end
   end
 
-  def respond_to_on_destroy
-    log_out_success && return if current_user
-
-    log_out_failure
+  def logged_in
+    if @current_customer
+      render json: {
+        logged_in: true,
+        customer: @current_customer
+      }
+    else
+      render json: {
+        logged_in: false
+      }
+    end
   end
 
-  def log_out_success
+  def logout
+    reset_session
     render json: {
-      message: 'You are logged out.', status: :ok
+      status: 200,
+      logged_out: true
     }
-  end
-  
-  def log_out_failure
-    render json: {
-      message: 'Nothing happened.'
-    }, status: :unauthorized
   end
 end

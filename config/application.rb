@@ -24,6 +24,8 @@ module IdeasApiBackend
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    config.action_controller.default_protect_from_forgery = true
+
     config.session_store :cookie_store, key: '_interslice_session'
 
     config.middleware.use ActionDispatch::Cookies
