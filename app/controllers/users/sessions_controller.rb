@@ -11,7 +11,7 @@ class Users::SessionsController < ApplicationController
       render json: {
         status: :created,
         logged_in: true,
-        customer: customer
+        customer: customer,
       }
     else
       render json: { status: 401 }
@@ -22,11 +22,11 @@ class Users::SessionsController < ApplicationController
     if @current_customer
       render json: {
         logged_in: true,
-        customer: @current_customer
+        customer: @current_customer,
       }
     else
       render json: {
-        logged_in: false
+        logged_in: false,
       }
     end
   end
