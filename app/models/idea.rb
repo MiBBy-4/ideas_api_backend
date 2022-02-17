@@ -5,4 +5,7 @@ class Idea < ApplicationRecord
   validates :sphere, presence: true
   validates :geo_focus, presence: true
   validates :investor_requirements, presence: true
+  validates_associated :customer
+
+  belongs_to :customer
 end

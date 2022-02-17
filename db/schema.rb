@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_15_145023) do
+ActiveRecord::Schema.define(version: 2022_02_17_210934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 2022_02_15_145023) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "views", default: 0
     t.integer "responses", default: 0
+    t.bigint "customer_id"
+    t.index ["customer_id"], name: "index_ideas_on_customer_id"
   end
 
   create_table "jwt_denylist", force: :cascade do |t|
@@ -60,4 +62,5 @@ ActiveRecord::Schema.define(version: 2022_02_15_145023) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "ideas", "customers"
 end
