@@ -12,6 +12,7 @@ class Api::V1::IdeasController < ApplicationController
   end
 
   def create
+    customer_id = session[:customer_id]
     @idea = Idea.new(idea_params)
 
     if @idea.save
@@ -40,6 +41,6 @@ class Api::V1::IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name, :description, :problem, :sphere, :investor_requirements, :geo_focus)
+      params.require(:idea).permit(:name, :description, :problem, :sphere, :investor_requirements, :geo_focus, :customer_id)
     end
 end
