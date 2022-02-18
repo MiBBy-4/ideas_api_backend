@@ -4,11 +4,11 @@ class Api::V1::IdeasController < ApplicationController
   def index
     @ideas = Idea.all
 
-    render json: @ideas
+    render json: @ideas.to_json(include: [:customer])
   end
 
   def show
-    render json: @idea
+    render json: @idea.to_json(include: [:customer])
   end
 
   def create
