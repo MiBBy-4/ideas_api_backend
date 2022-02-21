@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'http://localhost:3001'
+    origins ENV['FRONTEND_APP_LINK']
 
     resource '*',
       headers: :any,
@@ -16,7 +16,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins 'https://mib-idea-api.herokuapp.com'
+    origins ENV['HEROKU_APP_LINK']
 
     resource '*',
       headers: :any,
