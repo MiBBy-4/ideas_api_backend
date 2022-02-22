@@ -8,4 +8,5 @@ class Idea < ApplicationRecord
   validates_associated :customer
 
   belongs_to :customer
+  has_many :reactions
 end

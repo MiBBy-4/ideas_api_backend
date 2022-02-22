@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :reactions, only: [:create, :destroy]
+
   namespace :users do
     resources :sessions, only: [:create]
     resources :registrations, only: [:create]

@@ -5,4 +5,5 @@ class Customer < ApplicationRecord
   validates_uniqueness_of :email
 
   has_many :ideas
+  has_many :reactions
 end
