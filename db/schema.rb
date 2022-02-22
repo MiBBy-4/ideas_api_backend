@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_17_210934) do
+ActiveRecord::Schema.define(version: 2022_02_22_102859) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,10 @@ ActiveRecord::Schema.define(version: 2022_02_17_210934) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "role", default: 0
+    t.string "name"
+    t.string "surname"
+    t.string "phone_number"
+    t.string "skype"
   end
 
   create_table "ideas", force: :cascade do |t|
@@ -37,6 +41,8 @@ ActiveRecord::Schema.define(version: 2022_02_17_210934) do
     t.integer "views", default: 0
     t.integer "responses", default: 0
     t.bigint "customer_id"
+    t.float "avg_likes"
+    t.float "avg_dislikes"
     t.index ["customer_id"], name: "index_ideas_on_customer_id"
   end
 
