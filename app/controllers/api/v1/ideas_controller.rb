@@ -3,12 +3,11 @@ class Api::V1::IdeasController < ApplicationController
 
   def index
     @ideas = Idea.all
-
-    render json: @ideas.to_json(include: [:customer])
+    render json: @ideas.to_json(include: [:customer, :reactions])
   end
 
   def show
-    render json: @idea.to_json(include: [:customer])
+    render json: @idea.to_json(include: [:customer, :reactions])
   end
 
   def create

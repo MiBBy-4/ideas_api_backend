@@ -2,6 +2,13 @@ class ReactionsController < ApplicationController
   respond_to :json
   before_action :find_customer
 
+  def index
+    current_customer_reactions = @current_customer.reactions
+    render json: {
+      current_customer_reactions: current_customer_reactions,
+    }
+  end
+
   def create
     @reaction = @current_customer.reactions.new(reaction_params)
     if !@reaction.save
