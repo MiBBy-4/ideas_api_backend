@@ -3,7 +3,7 @@ class ReactionsController < ApplicationController
   before_action :find_customer
 
   def create
-    @reaction = current_customer.reactions.new(reaction_params)
+    @reaction = @current_customer.reactions.new(reaction_params)
     if !@reaction.save
       render json: {
         status: 500,
@@ -16,7 +16,7 @@ class ReactionsController < ApplicationController
   end
 
   def destroy
-    @reaction = current_customer.reactions.find(params[:id])
+    @reaction = @current_customer.reactions.find(params[:id])
     idea = @reaction.idea
     @reaction.destroy
     render json: {
@@ -31,6 +31,6 @@ class ReactionsController < ApplicationController
   end
 
   def find_customer
-    current_customer = Customer.find(session[:customer_id])
+    @current_customer = Customer.find(session[:customer_id])
   end
 end
