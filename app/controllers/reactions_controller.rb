@@ -8,11 +8,11 @@ class ReactionsController < ApplicationController
       render json: {
         status: 500,
       }
+    else
+      render json: {
+        status: :ok,
+      }
     end
-
-    render json: {
-      status: :ok,
-    }
   end
 
   def destroy
@@ -27,7 +27,7 @@ class ReactionsController < ApplicationController
   private
 
   def reaction_params
-    params.require(:reaction).permit(:idea_id)
+    params.require(:reaction).permit(:idea_id, :reaction)
   end
 
   def find_customer
