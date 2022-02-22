@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_22_105243) do
+ActiveRecord::Schema.define(version: 2022_02_22_135354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2022_02_22_105243) do
     t.bigint "idea_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "reaction"
     t.index ["customer_id", "idea_id"], name: "index_reactions_on_customer_id_and_idea_id", unique: true
     t.index ["customer_id"], name: "index_reactions_on_customer_id"
     t.index ["idea_id"], name: "index_reactions_on_idea_id"
