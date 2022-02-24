@@ -11,15 +11,34 @@ class ReactionsController < ApplicationController
 
   def create
     @reaction = @current_customer.reactions.new(reaction_params)
-    if !@reaction.save
-      render json: {
-        status: 500,
-      }
+    idea_id = @reaction.idea_id
+    if Reaction.exists?(customer_id: session[:customer_id], idea_id: idea_id)
+      reaction = Reaction.where(customer_id: session[:customer_id], idea_id: idea_id).last
+      if reaction.reaction === nil
+        reaction.attributes = { reaction: @reaction.reaction }
+        reaction.save
+        render json: {
+          status: 'Change from nil to bool',
+        }
+      else
+        reaction.attributes = { reaction: nil }
+        reaction.save
+        render json: {
+          status: 'Change to nil'
+        }
+      end
     else
-      render json: {
-        status: :ok,
-      }
+      if @reaction.save
+        render json: {
+          status: :ok,
+        }
+      else
+        render json: {
+          status: 500,
+        }
+      end
     end
+    
   end
 
   def destroy
