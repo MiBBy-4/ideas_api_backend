@@ -18,27 +18,30 @@ class ReactionsController < ApplicationController
         exist_reaction.attributes = { liked: @reaction.liked }
         exist_reaction.save
         render json: {
-          status: 'Change from nil to bool',
+          status: 200,
         }
       else
         if (exist_reaction.liked && !@reaction.liked) || (!exist_reaction.liked && @reaction.liked)
           exist_reaction.attributes = { liked: @reaction.liked }
           exist_reaction.save
           render json: {
-            status: 'Bool reaction was changed'
+            status: 200,
+            reaction: exist_reaction,
           }
         else
           exist_reaction.attributes = { liked: nil }
           exist_reaction.save
           render json: {
-            status: 'Change to nil'
+            status: 200,
+            reaction: exist_reaction,
           }
         end
       end
     else
       if @reaction.save
         render json: {
-          status: :ok,
+          status: 200,
+          reaction: @reaction,
         }
       else
         render json: {
@@ -53,7 +56,7 @@ class ReactionsController < ApplicationController
     @reaction = @current_customer.reactions.find(params[:id])
     @reaction.destroy
     render json: {
-      status: :ok,
+      status: 200,
     }   
   end
 
