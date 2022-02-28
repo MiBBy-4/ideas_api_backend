@@ -12,23 +12,23 @@ class ReactionsController < ApplicationController
   def create
     @reaction = @current_customer.reactions.new(reaction_params)
     idea_id = @reaction.idea_id
-    if Reaction.exists?(customer_id: session[:customer_id], idea_id: idea_id)
-      exist_reaction = Reaction.where(customer_id: session[:customer_id], idea_id: idea_id).last
-      if exist_reaction.reaction === nil
-        exist_reaction.attributes = { reaction: @reaction.reaction }
+    if Reaction.exists?(customer_id: @current_customer.id, idea_id: idea_id)
+      exist_reaction = Reaction.where(customer_id: @current_customer.id, idea_id: idea_id).last
+      if exist_reaction.liked.nil?
+        exist_reaction.attributes = { liked: @reaction.liked }
         exist_reaction.save
         render json: {
           status: 'Change from nil to bool',
         }
       else
-        if (exist_reaction.reaction === true && @reaction.reaction === false) || (exist_reaction.reaction === false && @reaction.reaction === true)
-          exist_reaction.attributes = { reaction: @reaction.reaction }
+        if (exist_reaction.liked && !@reaction.liked) || (!exist_reaction.liked && @reaction.liked)
+          exist_reaction.attributes = { liked: @reaction.liked }
           exist_reaction.save
           render json: {
             status: 'Bool reaction was changed'
           }
         else
-          exist_reaction.attributes = { reaction: nil }
+          exist_reaction.attributes = { liked: nil }
           exist_reaction.save
           render json: {
             status: 'Change to nil'
@@ -60,7 +60,7 @@ class ReactionsController < ApplicationController
   private
 
   def reaction_params
-    params.require(:reaction).permit(:idea_id, :reaction)
+    params.require(:reaction).permit(:idea_id, :liked)
   end
 
   def find_customer
