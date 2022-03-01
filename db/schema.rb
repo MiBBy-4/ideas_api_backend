@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_28_081846) do
+ActiveRecord::Schema.define(version: 2022_03_01_112554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,8 +41,6 @@ ActiveRecord::Schema.define(version: 2022_02_28_081846) do
     t.integer "views", default: 0
     t.integer "responses", default: 0
     t.bigint "customer_id"
-    t.float "avg_likes"
-    t.float "avg_dislikes"
     t.index ["customer_id"], name: "index_ideas_on_customer_id"
   end
 

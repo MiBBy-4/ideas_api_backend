@@ -45,7 +45,7 @@ class ReactionsController < ApplicationController
         }
       else
         render json: {
-          status: 500,
+          status: 400,
         }
       end
     end
