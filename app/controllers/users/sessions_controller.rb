@@ -9,7 +9,7 @@ class Users::SessionsController < ApplicationController
     if customer
       session[:customer_id] = customer.id
       render json: {
-        status: :created,
+        status: 201,
         logged_in: true,
         customer: customer,
       }

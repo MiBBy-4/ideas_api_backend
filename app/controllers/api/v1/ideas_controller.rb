@@ -15,9 +15,15 @@ class Api::V1::IdeasController < ApplicationController
     @idea = Idea.new(idea_params)
 
     if @idea.save
-      render json: @idea, status: :created, location: api_v1_ideas_path(@idea) 
+      render json: {
+        @idea, status: 201,
+        location: api_v1_ideas_path(@idea)
+      } 
     else
-      render json: @idea.errors, status: 422
+      render json: {
+        @idea.errors,
+        status: 422
+      }
     end
   end
 
@@ -25,7 +31,10 @@ class Api::V1::IdeasController < ApplicationController
     if @idea.update(idea_params)
       render json: @idea
     else
-      render json: @idea.errors, status: 422
+      render json: {
+        @idea.errors,
+        status: 422
+      }
     end
   end
 
