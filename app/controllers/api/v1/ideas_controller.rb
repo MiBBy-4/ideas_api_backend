@@ -17,7 +17,7 @@ class Api::V1::IdeasController < ApplicationController
     if @idea.save
       render json: @idea, status: :created, location: api_v1_ideas_path(@idea) 
     else
-      render json: @idea.errors, status: :unprocessable_entity
+      render json: @idea.errors, status: 422
     end
   end
 
@@ -25,7 +25,7 @@ class Api::V1::IdeasController < ApplicationController
     if @idea.update(idea_params)
       render json: @idea
     else
-      render json: @idea.errors, status: :unprocessable_entity
+      render json: @idea.errors, status: 422
     end
   end
 

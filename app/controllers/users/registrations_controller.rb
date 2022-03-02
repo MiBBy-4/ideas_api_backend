@@ -12,12 +12,12 @@ class Users::RegistrationsController < ApplicationController
     if customer
       session[:customer_id] = customer.id
       render json: {
-        status: :created,
+        status: 200,
         customer: customer
       }
     else
       render json: {
-        status: 500
+        status: 422
       }
     end
   end
