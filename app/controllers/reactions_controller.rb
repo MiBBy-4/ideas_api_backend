@@ -40,6 +40,7 @@ class ReactionsController < ApplicationController
       else
         render json: {
           status: 422,
+          @reactions.erorrs
         }
       end
     end

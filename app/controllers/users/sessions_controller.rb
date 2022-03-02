@@ -14,7 +14,7 @@ class Users::SessionsController < ApplicationController
         customer: customer,
       }
     else
-      render json: { status: 422 }
+      render json: customer.errors, status: 422 
     end
   end
 

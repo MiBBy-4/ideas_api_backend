@@ -17,6 +17,7 @@ class Users::RegistrationsController < ApplicationController
       }
     else
       render json: {
+        customer.erorrs,
         status: 422
       }
     end
