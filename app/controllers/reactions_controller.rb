@@ -19,6 +19,7 @@ class ReactionsController < ApplicationController
         exist_reaction.save
         render json: {
           status: 200,
+          reaction: exist_reaction,
         }
       else
         if (exist_reaction.liked && !@reaction.liked) || (!exist_reaction.liked && @reaction.liked)
