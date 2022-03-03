@@ -7,7 +7,7 @@ class Api::V1::IdeasController < ApplicationController
   end
 
   def show
-    if @date.publication_period >= today   
+    if @idea.publication_period >= today   
       render json: @idea.to_json(include: [:customer, :reactions])
     else
       render json: {
@@ -67,7 +67,7 @@ class Api::V1::IdeasController < ApplicationController
   private
 
     def today
-      today = Date.today
+      Date.today
     end
 
     def set_idea
