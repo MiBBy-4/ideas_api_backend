@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :ideas
-      patch :publication_period_update, to: 'ideas#update_publication_period'
+      patch 'publication_period_update/:id', to: 'ideas#update_publication_period'
     end
   end
 end
