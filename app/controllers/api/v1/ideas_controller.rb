@@ -1,5 +1,5 @@
 class Api::V1::IdeasController < ApplicationController
-  before_action :set_idea, only: [:show, :update, :destroy]
+  before_action :set_idea, only: [:show, :update, :destroy, :update_publication_period]
 
   def index
     @ideas = Idea.where("publication_period >= :date", date: today)
@@ -48,6 +48,10 @@ class Api::V1::IdeasController < ApplicationController
 
   def destroy
     @idea.destroy
+  end
+
+  def update_publication_period
+
   end
 
   private
