@@ -51,7 +51,17 @@ class Api::V1::IdeasController < ApplicationController
   end
 
   def update_publication_period
-
+    @idea.publication_period += 10
+     if @idea.save
+      render json: {
+        status: 200
+      }
+     else
+      render json: {
+        erorrs: @idea.errors,
+        status: 422
+      }
+     end
   end
 
   private
