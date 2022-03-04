@@ -1,6 +1,8 @@
 class Api::V1::IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :update, :destroy, :update_publication_period]
 
+  ADDITIONAL_DAYS = 10
+
   def index
     @ideas = Idea.where("publication_period >= :date", date: today)
     render json: @ideas.to_json(include: [:customer, :reactions])
@@ -24,7 +26,8 @@ class Api::V1::IdeasController < ApplicationController
 
     if @idea.save
       render json: {
-        errors: @idea, status: 201,
+        status: 201,
+        idea: @idea,
         location: api_v1_ideas_path(@idea)
       } 
     else
@@ -51,7 +54,7 @@ class Api::V1::IdeasController < ApplicationController
   end
 
   def update_publication_period
-    @idea.publication_period += 10
+    @idea.publication_period += ADDITIONAL_DAYS
      if @idea.save
       render json: {
         status: 200
