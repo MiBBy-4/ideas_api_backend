@@ -2,6 +2,7 @@ class Api::V1::IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :update, :destroy, :update_publication_period]
 
   ADDITIONAL_DAYS = 10
+  MONTH_DAYS = 30
 
   def index
     @ideas = Idea.where("publication_period >= :date", date: today)
@@ -22,7 +23,7 @@ class Api::V1::IdeasController < ApplicationController
   def create
     customer_id = session[:customer_id]
     @idea = Idea.new(idea_params)
-    @idea.publication_period = today + 30
+    @idea.publication_period = today + MONTH_DAYS
 
     if @idea.save
       render json: {
