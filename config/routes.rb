@@ -10,8 +10,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :ideas
-      patch 'publication_period_update/:id', to: 'ideas#update_publication_period'
+      resources :ideas do
+        patch 'publication_period_update', on: :member
+      end
     end
   end
 end
