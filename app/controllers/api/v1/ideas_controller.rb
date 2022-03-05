@@ -79,6 +79,6 @@ class Api::V1::IdeasController < ApplicationController
     end
 
     def idea_params
-      params.require(:idea).permit(:name, :description, :problem, :sphere, :investor_requirements, :geo_focus, :customer_id, :views)
+      params.require(:idea).permit(:name, :description, :problem, :sphere, :investor_requirements, :geo_focus, :customer_id, :views, :team, :next_steps)
     end
 end
