@@ -1,4 +1,4 @@
-class ReactionsController < ApplicationController
+class Api::V1::ReactionsController < ApplicationController
   respond_to :json
   before_action :find_customer
 

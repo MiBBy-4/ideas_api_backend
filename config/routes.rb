@@ -9,10 +9,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :reactions, only: [:create, :destroy]
       resources :ideas do
         patch 'update_publication_period', on: :member
       end
+      resources :reactions, only: [:create, :destroy]
     end
   end
 end
