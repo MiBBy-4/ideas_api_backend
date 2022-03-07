@@ -6,12 +6,12 @@ class Api::V1::IdeasController < ApplicationController
 
   def index
     @ideas = Idea.where("publication_period >= :date", date: today)
-    render json: @ideas.to_json(include: [:customer, :reactions])
+    render json: @ideas.to_json(include: [:customer, reactions: { only: [:liked] }])
   end
 
   def show
     if @idea.publication_period >= today   
-      render json: @idea.to_json(include: [:customer, :reactions])
+      render json: @idea.to_json(include: [:customer, reactions: { only: [:liked] }])
     else
       render json: {
         status: 403,
@@ -26,6 +26,7 @@ class Api::V1::IdeasController < ApplicationController
     @idea.publication_period = today + MONTH_DAYS
 
     if @idea.save
+      IdeaMailer.with(idea: @idea).idea_created.deliver_later
       render json: {
         status: 201,
         idea: @idea,
