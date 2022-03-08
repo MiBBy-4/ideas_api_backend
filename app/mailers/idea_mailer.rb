@@ -8,7 +8,7 @@ class IdeaMailer < ApplicationMailer
   #
   def idea_created
     @idea = params[:idea]
-    @greeting = "Hi"
+    @idea_link = "#{ENV['IDEA_LINK']}" + @idea.id.to_s
 
     mail(
       cc: Customer.where("role = :role",

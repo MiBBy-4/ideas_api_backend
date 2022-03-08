@@ -1,5 +1,12 @@
 <h1><%= @idea.name %> created</h1>
 
 <p>
-  <%= @greeting %>, find me in app/views/idea_mailer/idea_created.html.erb
+ <H4>Description:</H4> 
+ <%= @idea.description %>
 </p>
+<p>
+ <H4>Problem:</H4> 
+ <%= @idea.problem %>
+</p>
+
+<a href=<%= @idea_link%> target="_blank">Check Idea</a>
