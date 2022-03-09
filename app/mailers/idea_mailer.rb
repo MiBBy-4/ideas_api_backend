@@ -11,8 +11,7 @@ class IdeaMailer < ApplicationMailer
     @idea_link = "#{ENV['IDEA_LINK']}" + @idea.id.to_s
 
     mail(
-      cc: Customer.where("role = :role",
-      role: INVESTOR_ROLE).pluck(:email),
+      cc: Customer.where("role = :role", role: INVESTOR_ROLE).pluck(:email),
       subject: "New Idea created",
     )
   end

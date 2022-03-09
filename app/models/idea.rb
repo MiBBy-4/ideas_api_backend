@@ -9,4 +9,5 @@ class Idea < ApplicationRecord
 
   belongs_to :customer
   has_many :reactions, dependent: :delete_all
+  has_many :responses, dependent: :delete_all
 end

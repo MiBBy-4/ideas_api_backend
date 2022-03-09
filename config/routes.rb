@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         patch 'update_publication_period', on: :member
       end
       resources :reactions, only: [:create, :destroy]
+      resources :responses, only: [:create]
     end
   end
 end
