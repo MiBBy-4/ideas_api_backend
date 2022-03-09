@@ -8,5 +8,5 @@ class Idea < ApplicationRecord
   validates_associated :customer
 
   belongs_to :customer
-  has_many :reactions
+  has_many :reactions, dependent: :delete_all
 end
