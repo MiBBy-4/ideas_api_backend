@@ -1,6 +1,7 @@
 class Api::V1::ResponsesController < ApplicationController
   respond_to :json
-  before_action :find_customer
+  before_action :find_customer, only: [:create]
+  before_action :set_response, only: [:show]
 
   def create
     @response = @current_customer.responses.new(response_params)
@@ -17,7 +18,18 @@ class Api::V1::ResponsesController < ApplicationController
     end
   end
 
+  def show
+    render json: {
+      status: 200,
+      investors: @response.customer
+    }
+  end
+
   private
+
+  def set_response
+    @response = Response.find(params[:id])
+  end
 
   def response_params
     params.require(:response).permit(:idea_id)

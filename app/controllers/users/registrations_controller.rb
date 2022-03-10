@@ -6,7 +6,11 @@ class Users::RegistrationsController < ApplicationController
       email: params['customer']['email'],
       password: params['customer']['password'],
       password_confirmation: params['customer']['password_confirmation'],
-      role: params['customer']['role'],      
+      role: params['customer']['role'],
+      name: params['customer']['name'],
+      surname: params['customer']['surname'],
+      phone_number: params['customer']['phone_number'],
+      skype: params['customer']['skype'],
     )
 
     if customer
