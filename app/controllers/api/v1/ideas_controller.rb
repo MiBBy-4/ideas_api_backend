@@ -42,7 +42,7 @@ class Api::V1::IdeasController < ApplicationController
 
   def update
     if @idea.update(idea_params)
-      render json: @idea
+      render json: @idea, status: 200
     else
       render json: {
         errors: @idea.errors.full_messages,
