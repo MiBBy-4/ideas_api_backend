@@ -34,7 +34,7 @@ class Api::V1::IdeasController < ApplicationController
       } 
     else
       render json: {
-        errors: @idea.errors,
+        errors: @idea.errors.full_messages,
         status: 422
       }
     end
@@ -45,7 +45,7 @@ class Api::V1::IdeasController < ApplicationController
       render json: @idea
     else
       render json: {
-        errors: @idea.errors,
+        errors: @idea.errors.full_messages,
         status: 422
       }
     end
@@ -63,7 +63,7 @@ class Api::V1::IdeasController < ApplicationController
       }
      else
       render json: {
-        errors: @idea.errors,
+        errors: @idea.errors.full_messages,
         status: 422
       }
      end

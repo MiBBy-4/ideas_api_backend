@@ -3,7 +3,10 @@ class Customer < ApplicationRecord
 
   validates_presence_of :email
   validates_uniqueness_of :email
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, confirmation: { case_sensitive: false }
+  validates :name, presence: true, length: { in: 1..50 }
+  validates :surname, presence: true, length: { in: 1..50 }
+  validates :skype, presence: true, length: { in: 1..50 }
 
   has_many :ideas
   has_many :reactions 

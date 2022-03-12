@@ -13,7 +13,7 @@ class Api::V1::ResponsesController < ApplicationController
     else
       render json: {
         status: 422,
-        errors: @response.errors
+        errors: @response.errors.full_messages
       }
     end
   end

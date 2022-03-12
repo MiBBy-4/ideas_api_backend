@@ -9,7 +9,6 @@ class Users::RegistrationsController < ApplicationController
       role: params['customer']['role'],
       name: params['customer']['name'],
       surname: params['customer']['surname'],
-      phone_number: params['customer']['phone_number'],
       skype: params['customer']['skype'],
     )
 
