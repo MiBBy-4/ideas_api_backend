@@ -20,7 +20,7 @@ class Users::RegistrationsController < ApplicationController
       }
     else
       render json: {
-        erorrs: customer.errors.full_messages,
+        errors: customer.errors.full_messages,
         status: 422
       }
     end
