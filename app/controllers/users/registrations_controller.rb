@@ -2,7 +2,7 @@ class Users::RegistrationsController < ApplicationController
   respond_to :json
 
   def create
-    customer = Customer.create!(
+    customer = Customer.new(
       email: params['customer']['email'],
       password: params['customer']['password'],
       password_confirmation: params['customer']['password_confirmation'],
@@ -13,7 +13,7 @@ class Users::RegistrationsController < ApplicationController
       skype: params['customer']['skype'],
     )
 
-    if customer
+    if customer.save
       session[:customer_id] = customer.id
       render json: {
         status: 201,
@@ -21,7 +21,7 @@ class Users::RegistrationsController < ApplicationController
       }
     else
       render json: {
-        erorrs: customer.erorrs,
+        erorrs: customer.errors.full_messages,
         status: 422
       }
     end
