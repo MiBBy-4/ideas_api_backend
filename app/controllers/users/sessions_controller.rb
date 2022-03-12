@@ -14,7 +14,7 @@ class Users::SessionsController < ApplicationController
         customer: customer,
       }
     else
-      render json:{ errors: "User in not find or password is incorrect", status: 422} 
+      render json:{ errors: 'User in not find or password is incorrect', status: 422} 
     end
   end
 
