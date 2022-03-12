@@ -21,13 +21,13 @@ class Api::V1::ResponsesController < ApplicationController
   def show
     render json: {
       status: 200,
-      investors: @response.customer
+      investor: @response.customer
     }
   end
 
   private
 
-  def set_response
+  def set_response  
     @response = Response.find(params[:id])
   end
 
