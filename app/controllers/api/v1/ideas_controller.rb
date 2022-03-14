@@ -5,7 +5,7 @@ class Api::V1::IdeasController < ApplicationController
   MONTH_DAYS = 30
 
   def index
-    @ideas = Idea.where("publication_period >= :date", date: today)
+    @ideas = Idea.where("publication_period >= :date", date: today).order(id: :asc)
     render json: @ideas.to_json(include: [:customer, reactions: { only: [:liked] }, responses: { only: [:customer_id, :id] }])
   end
 

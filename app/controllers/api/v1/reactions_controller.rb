@@ -22,7 +22,7 @@ class Api::V1::ReactionsController < ApplicationController
             status: 200,
             reaction: exist_reaction,
           }
-        else
+        elsif (exist_reaction.liked && @reaction.liked) || (!exist_reaction.liked && !@reaction.liked)
           exist_reaction.attributes = { liked: nil }
           exist_reaction.save
           render json: {
