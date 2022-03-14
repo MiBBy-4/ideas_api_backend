@@ -26,7 +26,7 @@ module IdeasApiBackend
 
     config.action_controller.default_protect_from_forgery = true
 
-    config.session_store :cookie_store, key: '_ideas_api'
+    config.session_store :cookie_store, key: '_ideas_api', domain: :all
 
     config.middleware.use ActionDispatch::Cookies
     
