@@ -25,15 +25,8 @@ module IdeasApiBackend
     config.load_defaults 6.1
 
     config.action_controller.default_protect_from_forgery = true
-
-    if Rails.env == 'production'
-      config.session_store :cookie_store, key: "_ideas_api", domain: ENV['HEROKU_APP_DOMAIN']
-    else
-      config.session_store :cookie_store, key: "_ideas_api"
-    end
-
+    config.session_store :cookie_store, key: "_ideas_api", :domain => :all, :same_site => :none, :secure => :true
     config.middleware.use ActionDispatch::Cookies
-    
     config.middleware.use config.session_store, config.session_options
     # Configuration for the application, engines, and railties goes here.
     #
