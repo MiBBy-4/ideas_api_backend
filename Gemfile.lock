@@ -215,6 +215,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  bcrypt
   bootsnap (>= 1.4.4)
   byebug
   devise (~> 4.8)
