@@ -27,7 +27,7 @@ module IdeasApiBackend
     config.action_controller.default_protect_from_forgery = true
 
     if Rails.env == 'production'
-      config.session_store :cookie_store, key: "_ideas_api", domain: ENV['HEROKU_APP_DOMAIN']
+      config.session_store :cookie_store, key: "_ideas_api", domain: ENV['HEROKU_APP_DOMAIN'], secure: false
     else
       config.session_store :cookie_store, key: "_ideas_api"
     end
