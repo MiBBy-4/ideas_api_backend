@@ -104,4 +104,17 @@ RSpec.describe 'Ideas', type: :request do
       end
     end
   end
+
+  describe "DELETE /destroy" do
+    let!(:customer) { FactoryBot.create(:customer) }
+    let!(:idea) { FactoryBot.create(:idea) }
+
+    before do
+      delete "/api/v1/ideas/#{idea.id}"
+    end
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
 end
