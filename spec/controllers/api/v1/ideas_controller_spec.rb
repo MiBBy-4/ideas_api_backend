@@ -87,6 +87,21 @@ RSpec.describe 'Ideas', type: :request do
       it 'returns an updated name' do
         expect(json['name']).to eq(CHANGED_NAME)
       end
-    end    
+    end
+
+    context 'with invalid parameters' do
+      let!(:customer) { FactoryBot.create(:customer) }
+      let!(:full_idea) { FactoryBot.create(:idea) }
+      before do
+        patch "/api/v1/ideas/#{full_idea.id}", params:
+                              { idea: {
+                                name: '',                             
+                              } }
+      end
+
+      it 'returns a bad status' do
+        expect(json['status']).to eq(422)
+      end
+    end
   end
 end
