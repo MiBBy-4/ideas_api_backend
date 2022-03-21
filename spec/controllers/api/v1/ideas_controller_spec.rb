@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 MONTH_DAYS = 10
 
 RSpec.describe 'Ideas', type: :request do
@@ -19,10 +20,9 @@ RSpec.describe 'Ideas', type: :request do
   end
 
   describe 'POST /create' do
+    let!(:customer) { FactoryBot.create(:customer) }
+    let!(:full_idea) { FactoryBot.create(:idea) }
     context 'with valid parameters' do
-      let!(:customer) { FactoryBot.create(:customer) }
-      let!(:full_idea) { FactoryBot.create(:idea) }
-
       before do
         post '/api/v1/ideas', params:
                           { idea: {
@@ -72,20 +72,20 @@ RSpec.describe 'Ideas', type: :request do
   end
 
   describe 'PATCH /update' do
+    let!(:customer) { FactoryBot.create(:customer) }
+    let!(:full_idea) { FactoryBot.create(:idea) }
     context 'with valid parameters' do
-      let!(:customer) { FactoryBot.create(:customer) }
-      let!(:full_idea) { FactoryBot.create(:idea) }
-      CHANGED_NAME = 'Changed Name'
+      let!(:changed_name) { Faker::Lorem.sentence }
 
       before do
         patch "/api/v1/ideas/#{full_idea.id}", params:
                               { idea: {
-                                name: CHANGED_NAME,                             
+                                name: changed_name,                             
                               } }
       end
 
       it 'returns an updated name' do
-        expect(json['name']).to eq(CHANGED_NAME)
+        expect(json['name']).to eq(changed_name)
       end
     end
 
@@ -108,7 +108,6 @@ RSpec.describe 'Ideas', type: :request do
   describe "DELETE /destroy" do
     let!(:customer) { FactoryBot.create(:customer) }
     let!(:idea) { FactoryBot.create(:idea) }
-
     before do
       delete "/api/v1/ideas/#{idea.id}"
     end
