@@ -33,6 +33,7 @@ RSpec.describe 'Sessions', type: :request do
       it 'returns errors message' do
         expect(json['errors']).to eq('User in not find or password is incorrect')
       end
+      
       it 'returns bad code status' do
         expect(json['status']).to eq(422)
       end
