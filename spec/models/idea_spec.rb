@@ -2,12 +2,19 @@ require 'rails_helper'
 
 RSpec.describe 'Idea', type: :model do
   describe 'Idea model' do
+    let!(:customer) { FactoryBot.create(:customer) }
+    let!(:name) { Faker::Lorem.sentence }
+    let!(:description) { Faker::Lorem.paragraph }
+    let!(:problem) { Faker::Lorem.paragraph }
+    let!(:sphere) { Faker::Lorem.sentence }
+    let!(:geo_focus) { Faker::Lorem.sentence(word_count: 1) }
+    let!(:investor_requirements) { Faker::Lorem.paragraph }
+    let!(:team) { Faker::Lorem.paragraph }
+    let!(:next_steps) { Faker::Lorem.paragraph }
     context 'create with valid parameters' do
-      let!(:customer) { FactoryBot.create(:customer) }
-
       before do
-        @idea = Idea.new(name: 'Idk', description: 'idk', problem: 'idk', sphere: 'idk', geo_focus: 'idk', team: 'idk',
-                        next_steps: 'idk', investor_requirements: 'idk', customer_id: customer.id)
+        @idea = Idea.new(name: name, description: description, problem: problem, sphere: sphere, geo_focus: geo_focus, team: team,
+                        next_steps: next_steps, investor_requirements: investor_requirements, customer_id: customer.id)
       end
 
       it 'returns that idea is valid' do
@@ -27,8 +34,8 @@ RSpec.describe 'Idea', type: :model do
 
     context 'create without customer' do
       before do
-        @idea = Idea.new(name: 'Idk', description: 'idk', problem: 'idk', sphere: 'idk', geo_focus: 'idk', team: 'idk',
-                        next_steps: 'idk', investor_requirements: 'idk')
+        @idea = Idea.new(name: name, description: description, problem: problem, sphere: sphere, geo_focus: geo_focus, team: team,
+                        next_steps: next_steps, investor_requirements: investor_requirements)
       end
 
       it 'returns that idea is invalid' do

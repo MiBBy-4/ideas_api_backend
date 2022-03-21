@@ -3,6 +3,7 @@ require 'rails_helper'
 MONTH_DAYS = 10
 
 RSpec.describe 'Ideas', type: :request do
+
   describe 'GET /index' do
     before do
       FactoryBot.create(:customer)
@@ -22,6 +23,7 @@ RSpec.describe 'Ideas', type: :request do
   describe 'POST /create' do
     let!(:customer) { FactoryBot.create(:customer) }
     let!(:full_idea) { FactoryBot.create(:idea) }
+    
     context 'with valid parameters' do
       before do
         post '/api/v1/ideas', params:
@@ -74,6 +76,7 @@ RSpec.describe 'Ideas', type: :request do
   describe 'PATCH /update' do
     let!(:customer) { FactoryBot.create(:customer) }
     let!(:full_idea) { FactoryBot.create(:idea) }
+
     context 'with valid parameters' do
       let!(:changed_name) { Faker::Lorem.sentence }
 

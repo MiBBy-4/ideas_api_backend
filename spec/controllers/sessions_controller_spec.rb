@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Sessions', type: :request do
+
   describe 'Create session' do
     context 'log in with valid parameters' do
       let!(:customer) { FactoryBot.create(:customer) }
+      
       before do
         post '/users/sessions', params:
                             { customer: {
@@ -38,8 +40,10 @@ RSpec.describe 'Sessions', type: :request do
   end
 
   describe 'check logged in status' do
+
     context 'customer logged in' do
       let!(:customer) { FactoryBot.create(:customer) }
+
       before do
         post '/users/sessions', params:
                             { customer: {
@@ -70,6 +74,7 @@ RSpec.describe 'Sessions', type: :request do
   end
 
   describe 'logout' do
+
     context 'successfully logout' do
       before do
         delete '/users/logout'
